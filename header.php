@@ -17,6 +17,7 @@
     <title>Home</title>
   </head>
   <body>
+            <?php $admins=array("admin@dbms.com");?>
    <header>
          <nav>
                <div>
@@ -28,7 +29,15 @@
                   <?php
                      if(isset($_SESSION['id'])){
                          echo '<form action="includes/logout-inc.php" method="POST">
-                                 <button type="submit" name="submit">Logout</button></form>';
+                                 <button type="submit" name="submit">Logout</button></form>
+                                <div class="navigation">
+                                <a href="college.php">Colleges</a><br>
+                                <a href="#">Cutoffs</a><br>
+                                <a href="#">About</a><br>
+                                </div>
+                                 ';
+                            
+
                    }
                    else{
                      echo '<form action="includes/login-inc.php" method="POST">

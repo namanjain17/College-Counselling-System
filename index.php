@@ -8,6 +8,11 @@
           <?php
               if(isset($_SESSION['id'])){
                 echo "Welcome " . $_SESSION['name']. ". You are logged in.";
+              
+ 
+
+
+
             }
 
           ?>
