@@ -8,16 +8,12 @@
           <?php
               if(isset($_SESSION['id'])){
                 echo "Welcome " . $_SESSION['name']. ". You are logged in.";
-              
- 
-
-
+               
 
             }
 
           ?>
-     </div>
- </section>     
+   
 
 <?php
       include_once 'footer.php';

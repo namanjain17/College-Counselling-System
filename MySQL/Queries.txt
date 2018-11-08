@@ -79,7 +79,9 @@ SELECT * FROM (SELECT courseid FROM college INNER JOIN coursesoffered ON college
 //Query to show the cutoffs of a particular college order by category
 SELECT * FROM (SELECT * FROM cutoff WHERE collegeid='$collegeid') as t INNER JOIN course on t.courseid=course.courseid ORDER BY t.category ASC;
 
-
+//Query to filter cutoffs 
+//HERE $final is php string which constructs the further query based on filters given
+SELECT course.name as course_name,college.name as college_name,category,course.degree as degree,open,close from cutoff INNER JOIN college ON cutoff.collegeid=college.collegeid INNER JOIN course ON  cutoff.courseid = course.courseid where $final;  
 
 
 

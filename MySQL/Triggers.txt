@@ -1,0 +1,36 @@
+DELIMITER //
+CREATE TRIGGER users_update BEFORE UPDATE ON users
+    FOR EACH ROW
+    BEGIN
+	         IF NEW.email!=OLD.email then
+        IF NEW.email in (
+            select email
+            From users A  -- CHANGED THE ALIAS TO A
+            where a.email = new.email
+        ) THEN
+        
+           CALL `Insert not allowed`;
+
+        END IF;
+      END IF;  	
+    END;
+//
+DELIMITER ; 
+
+DELIMITER //
+CREATE TRIGGER users_insert BEFORE INSERT ON users
+    FOR EACH ROW
+    BEGIN
+	         
+        IF NEW.email in (
+            select email
+            From users A  -- CHANGED THE ALIAS TO A
+            where a.email = new.email
+        ) THEN
+        
+           CALL `Insert not allowed`;
+
+      END IF;  	
+    END;
+//
+DELIMITER ; 
