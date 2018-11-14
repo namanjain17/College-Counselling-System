@@ -14,9 +14,18 @@
     <link rel="stylesheet" href="bootstrap-4.0.0-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">  
 <style type="text/css">
-body { background: #e6e6e6 !important;
+body { 
+  background: #e6e6e6 !important;
 } 
-
+.card {
+  background-color: white;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 8px;
+  background-image: url('blog.jpg');
+  padding: 20px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  margin-top: 20px;
+}
 .container {
     width: 90%;
     height: 1600;
@@ -97,14 +106,12 @@ body { background: #e6e6e6 !important;
                   <?php
                      if(isset($_SESSION['id'])){
                          echo '
-                                
-                                
                   <nav class="navbar navbar-expand-sm bg-light navbar-light">
                     <div class="navbar-nav">
                       <a class="nav-item nav-link" href="myprofile.php">My Profile</a>
                       <a class="nav-item nav-link" href="college.php">Colleges</a>
                       <a class="nav-item nav-link" href="cutoff.php">Cutoff</a>
-                      
+                      <a class="nav-item nav-link" href="myblogs.php">My Blogs</a>
                     </div>
                 </nav>
                   ';

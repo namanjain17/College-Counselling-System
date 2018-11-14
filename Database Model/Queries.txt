@@ -1,0 +1,151 @@
+//Creating users table
+
+CREATE TABLE users(
+     id int not null AUTO_INCREMENT PRIMARY KEY,
+	 name varchar(256) not null,
+	 email  varchar(256) not null,
+	 gender varchar(10) not null,
+	 board_marks int,
+	 jee_air int,
+	 category varchar(256),
+	 pwd varchar(256)
+);
+// Creating college table
+CREATE TABLE college(
+     collegeid int not null AUTO_INCREMENT PRIMARY KEY,
+	 name varchar(256) not null,
+	 location  varchar(256) not null,
+	 email varchar(256),
+	 website varchar(256)
+);
+
+// Creating course table
+CREATE TABLE course(
+     courseid int not null AUTO_INCREMENT PRIMARY KEY,
+	 name varchar(256) not null,
+	 duration  int not null,
+	 degree varchar(256) not null
+);
+
+
+//Creating coursesoffered table
+CREATE TABLE coursesoffered(
+      collegeid int not null,
+	  courseid int not null
+);
+
+// Creating cutoff table
+CREATE TABLE cutoff(
+     collegeid int not null,
+	 courseid int not null,
+	 year int not null,
+	 category varchar(256) not null,
+	 open int,
+	 close int,
+	 PRIMARY KEY(collegeid,courseid,year,category);
+);
+CREATE TABLE blogs(
+     blogid int not null AUTO_INCREMENT PRIMARY KEY,
+	 userid int not null,
+	 subject text not null,
+	 datetime DATETIME not null.
+	 content text not null;
+);
+
+// Inserting data in course table 
+INSERT INTO course(name,duration,degree) VALUES
+     ("Engineering Physics",4,"BTECH")
+	 ("Bio Technology",4,"BTECH")
+	 
+//Inserting data in courseoffered
+INSERT INTO coursesoffered(collegeid,courseid) VALUES
+   (1,1),(1,2),(1,3),(1,5),(1,7),
+   (2,1),(2,2),(2,3),(2,6),(2,7),(2,8),(2,22),(2,23),(2,19),(2,20),(2,21),
+   (3,1),(3,2),(3,3),(3,4),(3,5),(3,7),(3,8),(3,10),(3,11),(3,13),(3,21),
+   (4,1),(4,2),(4,3),(4,6),(4,7),(4,8),(4,9),(4,5),(4,10),(4,11),(4,13),(4,17),(4,18),
+   (5,4),(5,23),(5,1),(5,2),(5,3),(5,4),(5,5),(5,6),(5,7),(5,8),(5,18),(5,20),(5,21),(5,15),(5,16),
+   (6,1),(6,2),(6,3),(6,4),(6,7),(6,8),(6,5),(6,22),(6,9),(6,10),(6,11),(6,12),(6,13),(6,15),(6,16),
+   (7,1),(7,2),(7,3),(7,7),(7,8),(7,17),(7,22),(7,23),(7,9),(7,16),(7,18),
+   (8,1),(8,2),(8,3),(8,4),(8,5),(8,7),(8,8),(8,17),(8,20),(8,21),
+   (9,1),(9,2),(9,3),(9,6),(9,7),(9,8),(9,23),(9,17),(9,22),
+   (10,1),(10,2),(10,3),(10,5),(10,8),(10,17),(10,22),
+   (11,1),(11,2),(11,3),(11,5),(11,7),(11,8),
+   (12,1),(12,2),(12,3),(12,7),(12,8),(12,10),
+   (13,1),(13,2),(13,3),(13,5),(13,6),(13,7),(13,9),(13,10),(13,11),(13,13),(13,15),
+   (14,1),(14,2),(14,3),(14,7),
+   (15,1),(15,2),(15,3),
+   (16,1),(16,2),(16,3),(16,7),(16,8);
+//Inserting into cutoff tables
+
+INSERT INTO cutoff(collegeid,courseid,year,category,open,close) VALUES 
+   (1,1,2017,"general",848,1500),(1,2,2017,"general",3870,4771),      (1,3,2017,"general",2750,3680);,(1,5,2017,"general",7054,8864),(1,7,2017,"general",5744,7258),
+    (1,1,2017,"obc",370,471),(1,2,2017,"obc",1011,1745),      (1,3,2017,"obc",1245,3680),(1,5,2017,"obc",2801,3204),(1,7,2017,"obc",2002,2254) ........ ;
+//Query to add a new user based on signup details
+INSERT INTO users(name,email,gender,pwd) VALUES ('$name','$email','$gender','$hashPwd'); 
+
+ 
+ // Query to show courses offered by a particular collegeid in order of duration of course
+SELECT * FROM (SELECT courseid FROM college INNER JOIN coursesoffered ON college.collegeid = coursesoffered.collegeid where college.collegeid='$collegeid')as t INNER JOIN course ON t.courseid=course.courseid order by course.duration ASC;
+
+//Query to show the cutoffs of a particular college order by category
+SELECT * FROM (SELECT * FROM cutoff WHERE collegeid='$collegeid') as t INNER JOIN course on t.courseid=course.courseid ORDER BY t.category ASC;
+
+
+// Query to show all blogs along with name of creator sorted by time of creation
+SELECT * FROM blogs INNER JOIN users ON blogs.userid=users.id ORDER BY blogs.datetime DESC;
+
+// Query to show all blogs created by a particular userid
+SELECT * FROM blogs where userid=\"$userid\";
+
+// Query to return details about a particular course
+SELECT * from course where name=\"$coursename\" AND degree=\"$degree\";
+
+//Query to add into cutoff table of a particular college
+INSERT INTO cutoff(collegeid,courseid,category,year,open,close) VALUES ($collegeid,$courseid,\"$category\",$year,$open,$close);
+
+//Query to return distinct names from particular entities to be displayed in filter system
+SELECT DISTINCT name from college;
+SELECT DISTINCT name from course;
+SELECT DISTINCT degree from course;
+SELECT DISTINCT category from cutoff;
+
+//Query to filter cutoffs 
+//HERE $final is php string which constructs the further query based on filters given
+SELECT course.name as course_name,college.name as college_name,category,course.degree as degree,open,close from cutoff INNER JOIN college ON cutoff.collegeid=college.collegeid INNER JOIN course ON  cutoff.courseid = course.courseid where $final;  
+
+//Query to create a new blog by a user
+INSERT INTO blogs(userid,datetime,subject,content) VALUES ($userid,NOW(),\"$subject\",\"$content\");
+
+//Query to return all details of a user
+SELECT * FROM users WHERE id='$id';
+
+
+//Query to update details about a  particular user
+UPDATE users SET name='$name',email='$email',gender='$gender',jee_air=$air,category='$category' where id=$id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

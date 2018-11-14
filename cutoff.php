@@ -101,7 +101,7 @@ include_once 'includes/dbh-inc.php';
 					}
 					
 				   
-					$sql="SELECT course.name as course_name,college.name as college_name,category,course.degree as degree,open,close from cutoff INNER JOIN college ON cutoff.collegeid=college.collegeid INNER JOIN course ON  cutoff.courseid = course.courseid where $final;";echo $sql;
+					$sql="SELECT course.name as course_name,college.name as college_name,category,course.degree as degree,open,close from cutoff INNER JOIN college ON cutoff.collegeid=college.collegeid INNER JOIN course ON  cutoff.courseid = course.courseid where $final ORDER BY category,close;";
 					$result=mysqli_query($conn,$sql);?>
 
 					<table  class="table table-striped">
@@ -120,7 +120,8 @@ include_once 'includes/dbh-inc.php';
 						<?php $cnt=1;
 						while($row=mysqli_fetch_assoc($result)){
 							$college_name=$row['college_name'];$degree=$row['degree'];$course_name=$row['course_name'];$category=$row['category'];$open=$row['open'];$close=$row['close'];
-							echo "<tr>
+							echo "
+							<tr>
 							<td>$cnt</td>
 							<td>$course_name</td>
 							<td>$college_name</td>
@@ -134,10 +135,15 @@ include_once 'includes/dbh-inc.php';
 
 						?>
 					</table>
+                    <div style="height:17px;"></div>
+                                       <h2  class="cp-clg-h">Mysql Query</h2><hr>
+                                       <?php echo $sql ?>
 
 					<?php		
 				}
 				?>  
+
+				 
 
 
 

@@ -1,0 +1,37 @@
+1)  Users
+    {id} -> {name,email,gender,jee_air,category,password}
+    {email} -> {id,name,gender,jee_air,category,password}
+	Candidate Keys  = {id},{email}
+    Primary Key = {id}
+    BCNF	
+
+2)	blogs
+    {blogid} -> {userid,subject,content,datetime}
+    Candidate Keys = {blogid}
+	Primary Key = {blogid}
+	BCNF
+	
+3)  college
+    {collegeid} -> {name,location,email,photo}
+    {email} -> {name,location,email,photo}
+	{name,location} -> {collegeid,email,photo}
+    Candidate Keys  = {collegeid},{email}
+    Primary Key = {collegeid} 
+    BCNF
+ 
+4)  course
+    {courseid} ->{name,duration,degree}
+    {name,degree} ->{courseid,duration}
+    Candidate key = {courseid}    
+    Primary Key = {coureid}
+    BCNF	 
+	 
+5)  courseoffered
+    Primary key {collegeid,courseid}
+	BCNF
+	
+6)  cutoff
+    {collegeid,courseid,year,category} -> {open,close}
+	Primary Key = {collegeid,courseid,year,category}
+	BCNF
+     	 

@@ -15,8 +15,8 @@
           $row=mysqli_fetch_assoc($result);
         ?>
 
-         <label>Name : </label><?php echo $row['name'] ?><br>
- 		 <label>E-Mail : </label><?php echo $row['email'] ?><br>
+       <label>Name : </label><?php echo $row['name'] ?><br>
+ 	   	 <label>E-Mail : </label><?php echo $row['email'] ?><br>
  	     <label>gender : </label><?php echo $row['gender'] ?><br>
  	     <?php 
               if(!empty($row['jee_air'])){
